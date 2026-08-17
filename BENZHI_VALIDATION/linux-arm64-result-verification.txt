@@ -1,0 +1,6 @@
+task_type: bugfix
+private_expected: 
+green
+private_exit_code: 0
+docker_build: green
+container_isolation: green

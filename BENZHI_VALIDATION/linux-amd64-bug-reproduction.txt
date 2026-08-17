@@ -1,0 +1,3 @@
+command: docker run --rm --platform linux/amd64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-001/private_tests/disable_subscription_private_test.go:/app/internal/webhook/disable_subscription_private_test.go:ro" go-webhook-dispatcher-bug1-candidate bash -c "go test -buildvcs=false -count=1 -run '^TestDisablePersistsInactiveState$' ./internal/webhook"
+exit_code: 0
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.010s
