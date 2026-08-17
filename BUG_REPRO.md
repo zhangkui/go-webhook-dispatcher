@@ -1,17 +1,17 @@
 # Bug Reproduction
 
-- Case: $bug
-- Task type: $taskType
-- Feature area: $feature
-- Affected flow: $flow
+- Case: BUG-001
+- Task type: bugfix
+- Feature area: subscription-lifecycle
+- Affected flow: POST /subscriptions/{id}/disable 后的事件匹配
 
 ## Observed Behavior
 
-按索引遍历并直接更新切片元素的 Active 字段。
+方法对 subscriptions 切片使用值拷贝遍历，只修改循环变量，返回成功但存储中的 Active 仍为 true，后续发布继续匹配该端点。
 
 ## Reproduction Steps
 
-Run the commands below from /app:
+Run from /app:
 
 `ash
 go test -buildvcs=false -count=1 -run "^TestDisabledSubscriptionStopsFutureDeliveries$" ./internal/webhook
@@ -19,8 +19,4 @@ go test -buildvcs=false -count=1 ./...
 go build -buildvcs=false ./...
 `
 
-The first command is the focused reproduction. The full test command confirms whether the same behavior affects the repository regression suite. The build command confirms the project still compiles.
-
-## Recorded Baseline Error
-
-See the preserved pre_fix.jsonl trajectory and cases/BUG-001/data/branch-base-red.txt outside the repository for the complete command output.
+The focused command is the reproduction. The full test command confirms repository impact, and the build command confirms compilation.
