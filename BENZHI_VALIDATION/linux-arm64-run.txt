@@ -1,7 +1,7 @@
-command: docker run --rm --platform linux/arm64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-002/private_tests/duplicate_event_private_test.go:/app/internal/webhook/duplicate_event_private_test.go:ro" go-webhook-dispatcher-bug2-candidate-arm64 bash -c "go version; go build ./...; echo BUILD_EXIT=$?; go test -buildvcs=false -count=20 -run '^TestDuplicatePublishLeavesDeliveryCountStable$' ./internal/webhook; echo PRIVATE_EXIT=$?; go test -buildvcs=false -count=1 ./...; echo ALL_EXIT=$?"
+command: docker run --rm --platform linux/arm64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-002/private_tests/duplicate_event_private_test.go:/app/internal/webhook/duplicate_event_private_test.go:ro" go-webhook-dispatcher-bug2-candidate-arm64 bash -c "go version; go build ./...; build_code=$?; echo BUILD_EXIT=$build_code; go test -buildvcs=false -count=20 -run '^TestDuplicatePublishLeavesDeliveryCountStable$' ./internal/webhook; private_code=$?; echo PRIVATE_EXIT=$private_code; go test -buildvcs=false -count=1 ./...; all_code=$?; echo ALL_EXIT=$all_code; exit 0"
 docker_exit_code: 0
 go version go1.22.12 linux/arm64
-BUILD_EXIT=True
+BUILD_EXIT=0
 --- FAIL: TestDuplicatePublishLeavesDeliveryCountStable (0.01s)
     duplicate_event_private_test.go:15: deliveries = 2, want 1
 --- FAIL: TestDuplicatePublishLeavesDeliveryCountStable (0.00s)
@@ -43,16 +43,16 @@ BUILD_EXIT=True
 --- FAIL: TestDuplicatePublishLeavesDeliveryCountStable (0.00s)
     duplicate_event_private_test.go:15: deliveries = 2, want 1
 FAIL
-FAIL	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.109s
+FAIL	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.163s
 FAIL
-PRIVATE_EXIT=True
+PRIVATE_EXIT=1
 ?   	github.com/zhangkui/go-webhook-dispatcher/cmd/webhookd	[no test files]
-ok  	github.com/zhangkui/go-webhook-dispatcher/internal/httpapi	0.274s
---- FAIL: TestDuplicatePublishLeavesDeliveryCountStable (0.02s)
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/httpapi	0.135s
+--- FAIL: TestDuplicatePublishLeavesDeliveryCountStable (0.01s)
     duplicate_event_private_test.go:15: deliveries = 2, want 1
 --- FAIL: TestDuplicateEventDoesNotCreateAdditionalDeliveries (0.00s)
     duplicate_event_verification_test.go:16: deliveries = 2, want 1
 FAIL
-FAIL	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.179s
+FAIL	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.092s
 FAIL
-ALL_EXIT=True
+ALL_EXIT=1

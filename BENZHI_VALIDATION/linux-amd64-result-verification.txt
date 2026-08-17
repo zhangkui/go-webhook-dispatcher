@@ -1,6 +1,6 @@
 task_type: diagnosis
-private_expected: 
-red
+build_exit_code: 0
 private_exit_code: 1
+all_tests_exit_code: 1
 docker_build: green
 container_isolation: green
