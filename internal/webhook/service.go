@@ -42,6 +42,9 @@ func (s *Service) Publish(event Event) ([]Delivery, error) {
 	}
 	now := s.clock.Now()
 	event.PublishedAt = now
+	if err := s.store.AddEvent(event); err != nil {
+		return nil, err
+	}
 	deliveries := make([]Delivery, 0)
 	for _, sub := range s.store.Subscriptions() {
 		if !matches(sub, event) {
@@ -53,9 +56,6 @@ func (s *Service) Publish(event Event) ([]Delivery, error) {
 			CreatedAt: now, UpdatedAt: now,
 		})
 		deliveries = append(deliveries, delivery)
-	}
-	if err := s.store.AddEvent(event); err != nil {
-		return nil, err
 	}
 	return deliveries, nil
 }
