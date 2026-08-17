@@ -75,9 +75,9 @@ func (s *MemoryStore) AddSubscription(sub Subscription) Subscription {
 func (s *MemoryStore) DisableSubscription(id string) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	for _, sub := range s.subscriptions {
-		if sub.ID == id {
-			sub.Active = false
+	for index := range s.subscriptions {
+		if s.subscriptions[index].ID == id {
+			s.subscriptions[index].Active = false
 			return nil
 		}
 	}
