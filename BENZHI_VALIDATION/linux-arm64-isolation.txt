@@ -1,0 +1,2 @@
+command: docker run --rm --platform linux/arm64 go-webhook-dispatcher-bug3-candidate-arm64 bash -lc "test ! -e /app/private_tests && test ! -e /app/gold_patch.patch && test ! -e /app/bug_fix_prompts.md && test ! -d /app/.git"
+exit_code: 0

@@ -1,0 +1,43 @@
+command: Set-Location 'F:\gonew\cc-data\go-webhook-dispatcher\branches\test_model_fix3'; docker build --platform linux/arm64 -t go-webhook-dispatcher-bug3-candidate-arm64 -f benzhi.Dockerfile .
+exit_code: 0
+#0 building with "desktop-linux" instance using docker driver
+System.Management.Automation.RemoteException
+#1 [internal] load build definition from benzhi.Dockerfile
+#1 transferring dockerfile: 118B done
+#1 DONE 0.0s
+System.Management.Automation.RemoteException
+#2 [internal] load metadata for docker.io/library/golang:1.22
+#2 DONE 0.2s
+System.Management.Automation.RemoteException
+#3 [1/4] FROM docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02
+#3 resolve docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02 0.0s done
+#3 DONE 0.0s
+System.Management.Automation.RemoteException
+#4 [2/4] WORKDIR /app
+#4 CACHED
+System.Management.Automation.RemoteException
+#5 [internal] load .dockerignore
+#5 transferring context: 137B done
+#5 DONE 0.0s
+System.Management.Automation.RemoteException
+#6 [internal] load build context
+#6 transferring context: 1.09kB done
+#6 DONE 0.0s
+System.Management.Automation.RemoteException
+#7 [3/4] COPY . .
+#7 DONE 0.0s
+System.Management.Automation.RemoteException
+#8 [4/4] RUN go build ./...
+#8 DONE 126.9s
+System.Management.Automation.RemoteException
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 3.0s done
+#9 exporting manifest sha256:f6912c73e5c76d9e15fada80a23889989c2c65197fc4d92fc9a271cbc033c24f 0.0s done
+#9 exporting config sha256:277e6bd5ce9b70bbb07f1dcc1e52a75f1a0ea4cdb5765d81969718c38e17b652 0.0s done
+#9 exporting attestation manifest sha256:f565513d8deaab0eb2aaf1182c35643e14cd940248dd693610dab46910a21cf5 0.0s done
+#9 exporting manifest list sha256:a07091c5f9dc56a09a23400657b6578440a7c6f4d6ff6fddaf82d91e98638338 0.0s done
+#9 naming to docker.io/library/go-webhook-dispatcher-bug3-candidate-arm64:latest done
+#9 DONE 3.2s
+System.Management.Automation.RemoteException
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ph8xtmc0ra8oqnxp3r82jgs8f

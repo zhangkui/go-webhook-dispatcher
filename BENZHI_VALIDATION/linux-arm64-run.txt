@@ -1,0 +1,10 @@
+command: docker run --rm --platform linux/arm64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-003/private_tests/signature_version_private_test.go:/app/internal/webhook/signature_version_private_test.go:ro" go-webhook-dispatcher-bug3-candidate-arm64 bash -c "go version; go build ./...; echo BUILD_EXIT=$?; go test -buildvcs=false -count=20 -run '^TestHistoricalDeliveryUsesPinnedSecretVersion$' ./internal/webhook; echo PRIVATE_EXIT=$?; go test -buildvcs=false -count=1 ./...; echo ALL_EXIT=$?"
+docker_exit_code: 0
+go version go1.22.12 linux/arm64
+BUILD_EXIT=True
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.124s
+PRIVATE_EXIT=True
+?   	github.com/zhangkui/go-webhook-dispatcher/cmd/webhookd	[no test files]
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/httpapi	0.179s
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.111s
+ALL_EXIT=True

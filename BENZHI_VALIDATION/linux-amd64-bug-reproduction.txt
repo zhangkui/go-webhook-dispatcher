@@ -1,0 +1,3 @@
+command: docker run --rm --platform linux/amd64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-003/private_tests/signature_version_private_test.go:/app/internal/webhook/signature_version_private_test.go:ro" go-webhook-dispatcher-bug3-candidate bash -c "go test -buildvcs=false -count=1 -run '^TestHistoricalDeliveryUsesPinnedSecretVersion$' ./internal/webhook"
+exit_code: 0
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.003s
