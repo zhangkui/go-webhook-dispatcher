@@ -1,0 +1,58 @@
+command: docker run --rm --platform linux/amd64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-004/private_tests/retry_backoff_private_test.go:/app/internal/webhook/retry_backoff_private_test.go:ro" go-webhook-dispatcher-bug4-candidate bash -c "go version; go build ./...; echo BUILD_EXIT=$?; go test -buildvcs=false -count=20 -run '^TestRetryScheduleFollowsExpectedSequence$' ./internal/webhook; echo PRIVATE_EXIT=$?; go test -buildvcs=false -count=1 ./...; echo ALL_EXIT=$?"
+docker_exit_code: 0
+go version go1.22.12 linux/amd64
+BUILD_EXIT=True
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+FAIL
+FAIL	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.007s
+FAIL
+PRIVATE_EXIT=True
+?   	github.com/zhangkui/go-webhook-dispatcher/cmd/webhookd	[no test files]
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/httpapi	0.007s
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+--- FAIL: TestRetryPolicyStartsAtBaseDelay (0.00s)
+    retry_backoff_verification_test.go:12: attempt 1 delay = 10s, want 5s
+FAIL
+FAIL	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.006s
+FAIL
+ALL_EXIT=True

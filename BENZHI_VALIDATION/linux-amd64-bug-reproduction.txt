@@ -1,0 +1,7 @@
+command: docker run --rm --platform linux/amd64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-004/private_tests/retry_backoff_private_test.go:/app/internal/webhook/retry_backoff_private_test.go:ro" go-webhook-dispatcher-bug4-candidate bash -c "go test -buildvcs=false -count=1 -run '^TestRetryScheduleFollowsExpectedSequence$' ./internal/webhook"
+exit_code: 1
+--- FAIL: TestRetryScheduleFollowsExpectedSequence (0.00s)
+    retry_backoff_private_test.go:12: attempt 1 delay = 10s, want 5s
+FAIL
+FAIL	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.003s
+FAIL
