@@ -126,12 +126,16 @@ func (s *Service) ReplayDeadLetter(id string) (Delivery, error) {
 		return Delivery{}, ErrDeliveryNotDead
 	}
 	now := s.clock.Now()
-	delivery.Status = DeliveryPending
-	delivery.AttemptCount = 0
-	delivery.NextAttemptAt = now
-	delivery.UpdatedAt = now
-	if err := s.store.UpdateDelivery(delivery); err != nil {
-		return Delivery{}, err
-	}
-	return delivery, nil
+	replay := s.store.AddDelivery(Delivery{
+		EventID:        delivery.EventID,
+		SubscriptionID: delivery.SubscriptionID,
+		Endpoint:       delivery.Endpoint,
+		Status:         DeliveryPending,
+		NextAttemptAt:  now,
+		KeyVersion:     delivery.KeyVersion,
+		ReplayOf:       delivery.ID,
+		CreatedAt:      now,
+		UpdatedAt:      now,
+	})
+	return replay, nil
 }
