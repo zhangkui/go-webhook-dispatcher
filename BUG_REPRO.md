@@ -1,17 +1,17 @@
 # Bug Reproduction
 
-- Case: $bug
-- Task type: $taskType
-- Feature area: $feature
-- Affected flow: $flow
+- Case: BUG-005
+- Task type: bugfix
+- Feature area: dead-letter-replay
+- Affected flow: POST /deliveries/{id}/replay 的审计记录保留
 
 ## Observed Behavior
 
-保留原死信记录不变，创建新的 pending Delivery，并用 ReplayOf 指向原记录。
+重放直接把原死信 Delivery 改回 pending 并清零尝试次数，覆盖原始终态，历史 Attempts 与当前状态语义分裂，也无法区分重放任务。
 
 ## Reproduction Steps
 
-Run the commands below from /app:
+Run from /app:
 
 `ash
 go test -buildvcs=false -count=1 -run "^TestReplayCreatesNewDeliveryAndPreservesDeadLetter$" ./internal/webhook
@@ -19,8 +19,4 @@ go test -buildvcs=false -count=1 ./...
 go build -buildvcs=false ./...
 `
 
-The first command is the focused reproduction. The full test command confirms whether the same behavior affects the repository regression suite. The build command confirms the project still compiles.
-
-## Recorded Baseline Error
-
-See the preserved pre_fix.jsonl trajectory and cases/BUG-005/data/branch-base-red.txt outside the repository for the complete command output.
+The focused command is the reproduction. The full test command confirms repository impact, and the build command confirms compilation.
