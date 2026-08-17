@@ -1,0 +1,3 @@
+command: docker run --rm --platform linux/arm64 -v "F:/gonew/cc-data/go-webhook-dispatcher/cases/BUG-005/private_tests/dead_letter_replay_private_test.go:/app/internal/webhook/dead_letter_replay_private_test.go:ro" go-webhook-dispatcher-bug5-candidate-arm64 bash -c "go test -buildvcs=false -count=1 -run '^TestReplayMaintainsOriginalAttemptHistory$' ./internal/webhook"
+exit_code: 0
+ok  	github.com/zhangkui/go-webhook-dispatcher/internal/webhook	0.113s

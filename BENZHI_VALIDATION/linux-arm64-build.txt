@@ -1,0 +1,45 @@
+command: Set-Location 'F:\gonew\cc-data\go-webhook-dispatcher\branches\test_model_fix5'; docker build --platform linux/arm64 -t go-webhook-dispatcher-bug5-candidate-arm64 -f benzhi.Dockerfile .
+exit_code: 0
+#0 building with "desktop-linux" instance using docker driver
+System.Management.Automation.RemoteException
+#1 [internal] load build definition from benzhi.Dockerfile
+#1 transferring dockerfile: 118B 0.0s done
+#1 DONE 0.0s
+System.Management.Automation.RemoteException
+#2 [internal] load metadata for docker.io/library/golang:1.22
+#2 DONE 0.1s
+System.Management.Automation.RemoteException
+#3 [internal] load .dockerignore
+#3 transferring context: 137B done
+#3 DONE 0.0s
+System.Management.Automation.RemoteException
+#4 [1/4] FROM docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02
+#4 resolve docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02 0.0s done
+#4 DONE 0.0s
+System.Management.Automation.RemoteException
+#5 [internal] load build context
+#5 transferring context: 1.09kB done
+#5 DONE 0.0s
+System.Management.Automation.RemoteException
+#6 [2/4] WORKDIR /app
+#6 CACHED
+System.Management.Automation.RemoteException
+#7 [3/4] COPY . .
+#7 DONE 0.0s
+System.Management.Automation.RemoteException
+#8 [4/4] RUN go build ./...
+#8 DONE 114.6s
+System.Management.Automation.RemoteException
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 3.2s done
+#9 exporting manifest sha256:78ef96f6667bf2ace627251f7594a6ee779d0bf9f61a8c6345138f0c40a8a63e
+#9 exporting manifest sha256:78ef96f6667bf2ace627251f7594a6ee779d0bf9f61a8c6345138f0c40a8a63e 0.0s done
+#9 exporting config sha256:71d813dcc5f7fc3d6fd0c7e868ecb350438b20beb1d4e61b56294c03c488fd53 0.0s done
+#9 exporting attestation manifest sha256:3a40c11a61e3ee266f0c06d60607e7bc2a8f4253858d78bed62a466d2fcbbb69
+#9 exporting attestation manifest sha256:3a40c11a61e3ee266f0c06d60607e7bc2a8f4253858d78bed62a466d2fcbbb69 0.0s done
+#9 exporting manifest list sha256:ffab6d2caf24f41f2748fa7ddf8677bf89c82c025a37158a87168ecc7ff48832 0.0s done
+#9 naming to docker.io/library/go-webhook-dispatcher-bug5-candidate-arm64:latest done
+#9 DONE 3.6s
+System.Management.Automation.RemoteException
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/qbl404p68c02a1tyngqtgqq61
