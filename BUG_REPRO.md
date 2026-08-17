@@ -1,17 +1,17 @@
 # Bug Reproduction
 
-- Case: $bug
-- Task type: $taskType
-- Feature area: $feature
-- Affected flow: $flow
+- Case: BUG-004
+- Task type: diagnosis
+- Feature area: retry-scheduling
+- Affected flow: 失败投递的首次及后续指数退避
 
 ## Observed Behavior
 
-第 N 次失败使用 BaseDelay*2^(N-1)，并保持最小 attempt 和 MaxDelay 封顶。
+退避指数直接使用 attempt，首次失败 attempt=1 时计算 2^1 倍基础延迟，整个序列比约定多移一位；最大延迟封顶会掩盖较后次数的差异。
 
 ## Reproduction Steps
 
-Run the commands below from /app:
+Run from /app:
 
 `ash
 go test -buildvcs=false -count=1 -run "^TestRetryPolicyStartsAtBaseDelay$" ./internal/webhook
@@ -19,8 +19,4 @@ go test -buildvcs=false -count=1 ./...
 go build -buildvcs=false ./...
 `
 
-The first command is the focused reproduction. The full test command confirms whether the same behavior affects the repository regression suite. The build command confirms the project still compiles.
-
-## Recorded Baseline Error
-
-See the preserved pre_fix.jsonl trajectory and cases/BUG-004/data/branch-base-red.txt outside the repository for the complete command output.
+The focused command is the reproduction. The full test command confirms repository impact, and the build command confirms compilation.
