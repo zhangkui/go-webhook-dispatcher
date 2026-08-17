@@ -1,17 +1,17 @@
 # Bug Reproduction
 
-- Case: $bug
-- Task type: $taskType
-- Feature area: $feature
-- Affected flow: $flow
+- Case: BUG-002
+- Task type: diagnosis
+- Feature area: event-idempotency
+- Affected flow: POST /events 重复事件 ID 冲突处理
 
 ## Observed Behavior
 
-在任何投递任务创建前完成事件唯一性登记，登记失败立即返回。
+发布流程先枚举订阅并写入投递任务，最后才调用 AddEvent 检查事件 ID；重复 ID 返回冲突时，副作用已经发生，导致重复投递任务残留。
 
 ## Reproduction Steps
 
-Run the commands below from /app:
+Run from /app:
 
 `ash
 go test -buildvcs=false -count=1 -run "^TestDuplicateEventDoesNotCreateAdditionalDeliveries$" ./internal/webhook
@@ -19,8 +19,4 @@ go test -buildvcs=false -count=1 ./...
 go build -buildvcs=false ./...
 `
 
-The first command is the focused reproduction. The full test command confirms whether the same behavior affects the repository regression suite. The build command confirms the project still compiles.
-
-## Recorded Baseline Error
-
-See the preserved pre_fix.jsonl trajectory and cases/BUG-002/data/branch-base-red.txt outside the repository for the complete command output.
+The focused command is the reproduction. The full test command confirms repository impact, and the build command confirms compilation.
