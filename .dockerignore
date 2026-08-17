@@ -1,0 +1,8 @@
+.git
+.gitignore
+BENZHI_VALIDATION
+*.log
+private_tests
+patches
+gold_patch.patch
+bug_fix_prompts.md
