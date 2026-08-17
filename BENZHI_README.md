@@ -2,7 +2,7 @@
 
 ## Project
 
-- Repository: $repo
+- Repository: zhangkui/go-webhook-dispatcher
 - Purpose: in-memory webhook filtering, signing, delivery retry, and dead-letter replay service.
 - Go toolchain: golang:1.22.
 - Frontend toolchain: none.
@@ -35,8 +35,8 @@ go test -buildvcs=false -count=1 ./...
 go build -buildvcs=false ./...
 `
 
-Task type: $taskType. For diagnosis tasks, the target test remains red by design and serves as the reproduction evidence; the build command remains green.
+Task type: bugfix. For diagnosis tasks, the target command remains red by design and is the reproduction evidence; the build command remains green.
 
 ## Bug Reproduction
 
-See BUG_REPRO.md for the observed behavior and expected evidence.
+See BUG_REPRO.md for observed behavior and recorded evidence.

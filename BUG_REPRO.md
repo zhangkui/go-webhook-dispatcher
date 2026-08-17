@@ -1,17 +1,17 @@
 # Bug Reproduction
 
-- Case: $bug
-- Task type: $taskType
-- Feature area: $feature
-- Affected flow: $flow
+- Case: BUG-003
+- Task type: bugfix
+- Feature area: signature-key-rotation
+- Affected flow: 按投递记录密钥版本生成 HMAC
 
 ## Observed Behavior
 
-只使用 secrets[version] 对应的密钥，不被其他版本覆盖。
+函数虽然验证请求版本存在，却继续扫描密钥并用更高版本覆盖 secret；历史任务保留旧 KeyVersion，但签名实际使用新密钥，接收方按记录版本验签失败。
 
 ## Reproduction Steps
 
-Run the commands below from /app:
+Run from /app:
 
 `ash
 go test -buildvcs=false -count=1 -run "^TestSignPayloadUsesRequestedKeyVersion$" ./internal/webhook
@@ -19,8 +19,4 @@ go test -buildvcs=false -count=1 ./...
 go build -buildvcs=false ./...
 `
 
-The first command is the focused reproduction. The full test command confirms whether the same behavior affects the repository regression suite. The build command confirms the project still compiles.
-
-## Recorded Baseline Error
-
-See the preserved pre_fix.jsonl trajectory and cases/BUG-003/data/branch-base-red.txt outside the repository for the complete command output.
+The focused command is the reproduction. The full test command confirms repository impact, and the build command confirms compilation.
