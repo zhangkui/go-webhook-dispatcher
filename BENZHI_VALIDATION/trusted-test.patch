@@ -1,0 +1,23 @@
+diff --git a/internal/webhook/duplicate_event_verification_test.go b/internal/webhook/duplicate_event_verification_test.go
+new file mode 100644
+index 0000000..8794f13
+--- /dev/null
++++ b/internal/webhook/duplicate_event_verification_test.go
+@@ -0,0 +1,17 @@
++package webhook
++
++import (
++	"errors"
++	"testing"
++)
++
++func TestDuplicateEventDoesNotCreateAdditionalDeliveries(t *testing.T) {
++	service, _, _, _ := newTestService(202)
++	_, err := service.RegisterSubscription(Subscription{Endpoint: "https://example.test/hook", EventTypes: []string{"invoice.paid"}, Secrets: map[int]string{1: "secret"}, KeyVersion: 1})
++	if err != nil { t.Fatal(err) }
++	event := Event{ID: "evt-duplicate", Type: "invoice.paid", Payload: []byte("{}")}
++	if _, err := service.Publish(event); err != nil { t.Fatal(err) }
++	if _, err := service.Publish(event); !errors.Is(err, ErrEventAlreadyExists) { t.Fatalf("error = %v", err) }
++	deliveries := service.Deliveries(DeliveryFilter{EventID: event.ID})
++	if len(deliveries) != 1 { t.Fatalf("deliveries = %d, want 1", len(deliveries)) }
++}

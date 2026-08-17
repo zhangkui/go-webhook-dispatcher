@@ -1,0 +1,45 @@
+command: Set-Location 'F:\gonew\cc-data\go-webhook-dispatcher\branches\test_model_fix2'; docker build --platform linux/amd64 -t go-webhook-dispatcher-bug2-candidate -f benzhi.Dockerfile .
+exit_code: 0
+#0 building with "desktop-linux" instance using docker driver
+System.Management.Automation.RemoteException
+#1 [internal] load build definition from benzhi.Dockerfile
+#1 transferring dockerfile: 118B 0.0s done
+#1 DONE 0.0s
+System.Management.Automation.RemoteException
+#2 [internal] load metadata for docker.io/library/golang:1.22
+#2 DONE 0.3s
+System.Management.Automation.RemoteException
+#3 [internal] load .dockerignore
+#3 transferring context: 137B done
+#3 DONE 0.0s
+System.Management.Automation.RemoteException
+#4 [1/4] FROM docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02
+#4 resolve docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02 0.0s done
+#4 DONE 0.0s
+System.Management.Automation.RemoteException
+#5 [internal] load build context
+#5 transferring context: 30.96kB 0.0s done
+#5 DONE 0.1s
+System.Management.Automation.RemoteException
+#6 [2/4] WORKDIR /app
+#6 CACHED
+System.Management.Automation.RemoteException
+#7 [3/4] COPY . .
+#7 DONE 0.1s
+System.Management.Automation.RemoteException
+#8 [4/4] RUN go build ./...
+#8 DONE 11.1s
+System.Management.Automation.RemoteException
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 1.9s done
+#9 exporting manifest sha256:3fd606109a95b1ad0bdf762971cf634a50877038e5173b02322304925316db99 0.0s done
+#9 exporting config sha256:f32c1c83cdd5caa99245b396655870afc6e8593568becf292db4b70d431f9fc3 0.0s done
+#9 exporting attestation manifest sha256:2022e057dc55c4923b472856b64446b6dc85e6b9b304c4931fd7c345f5f1486b 0.0s done
+#9 exporting manifest list sha256:80076cad8a6590811432b3a8d4432dfc6973691f9c7cfb4b2e3ad3dc7615b3ba 0.0s done
+#9 naming to docker.io/library/go-webhook-dispatcher-bug2-candidate:latest done
+#9 unpacking to docker.io/library/go-webhook-dispatcher-bug2-candidate:latest
+#9 unpacking to docker.io/library/go-webhook-dispatcher-bug2-candidate:latest 0.5s done
+#9 DONE 2.5s
+System.Management.Automation.RemoteException
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/t1aj4b0pgnqongs4vx96ceybj
