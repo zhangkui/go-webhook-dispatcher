@@ -118,20 +118,22 @@ func (s *Service) Deliveries(filter DeliveryFilter) []Delivery { return s.store.
 func (s *Service) Attempts(deliveryID string) []Attempt        { return s.store.Attempts(deliveryID) }
 
 func (s *Service) ReplayDeadLetter(id string) (Delivery, error) {
-	delivery, ok := s.store.Delivery(id)
+	original, ok := s.store.Delivery(id)
 	if !ok {
 		return Delivery{}, ErrDeliveryNotFound
 	}
-	if delivery.Status != DeliveryDeadLetter {
+	if original.Status != DeliveryDeadLetter {
 		return Delivery{}, ErrDeliveryNotDead
 	}
+	// Replay creates a brand-new, independently-IDed pending delivery that
+	// inherits the original's event, subscription, endpoint and key version.
+	// The original dead-letter record and its attempt history are left intact
+	// so the audit trail of the initial failure is preserved.
 	now := s.clock.Now()
-	delivery.Status = DeliveryPending
-	delivery.AttemptCount = 0
-	delivery.NextAttemptAt = now
-	delivery.UpdatedAt = now
-	if err := s.store.UpdateDelivery(delivery); err != nil {
-		return Delivery{}, err
-	}
-	return delivery, nil
+	replay := s.store.AddDelivery(Delivery{
+		EventID: original.EventID, SubscriptionID: original.SubscriptionID, Endpoint: original.Endpoint,
+		Status: DeliveryPending, NextAttemptAt: now, KeyVersion: original.KeyVersion, ReplayOf: original.ID,
+		CreatedAt: now, UpdatedAt: now,
+	})
+	return replay, nil
 }
